@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Transfer Client</title>
+	<link rel="stylesheet" href="css/style.css" />
+</h:head>
+<h:body>
+<header>
+	<h1>Proxibanque</h1>
+	<p id="soustitre">La Banque proche de vous.</p>
+	</header>
+	<h:form>
+		<p:menubar>
+			<p:menuitem action="listeConseillers" value="Liste conseillers" />
+			<f:facet name="options">
+				<p:outputLabel class="barre"
+					value="Bonjour #{gerantBean.gerant.nom}, " />
+				<p:commandButton class="barre" type="submit" icon="ui-icon-extlink"
+					action="#{gerantBean.deconnexion}" value="Déconnexion" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+	<h3>Choisir un nouveau conseiller</h3>
+	<h:form>
+		<p:dataTable value="#{conseillerBean.conseillers}" var="c" border="1" style="width: 700">
+
+			<p:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{c.idPersonne}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Nom</f:facet>
+				<h:outputText value="#{c.nom}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Prénom</f:facet>
+				<h:outputText value="#{c.prenom}" />
+
+			</p:column>
+			<p:column>
+				<f:facet name="header">Choisir</f:facet>
+				<h:commandLink action="#{clientBean.modifierConseiller}"
+					value="Choisir">
+					<f:setPropertyActionListener value="#{c}"
+						target="#{conseillerBean.conseiller}" />
+				</h:commandLink>
+
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>
